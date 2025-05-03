@@ -8,8 +8,8 @@ import { Toaster } from "@/components/ui/toaster"; // Import Toaster
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Canary Ball - Canary Basketball League Info',
-  description: 'Visualize detailed information about the Canary Basketball League.',
+  title: 'Control de Ligas',
+  description: 'Toda la informacion de tus ligas.',
 };
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="es" className="h-full">
       <body className={`${inter.className} flex flex-col min-h-screen antialiased`}>
         <Header />
         <main className="flex-grow container mx-auto px-4 py-8">

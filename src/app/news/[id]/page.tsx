@@ -1,18 +1,29 @@
+import type { PageProps } from 'next'; 
 // Placeholder for News Detail Page
 // This page would fetch a specific news item by ID and display its full content.
 
 import { getNewsHighlights } from "@/lib/data"; // Assuming a function getNewsById exists or can be derived
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"; 
 import { format } from 'date-fns';
 
 
-interface NewsDetailPageProps {
-  params: { id: string };
+
+export interface NewsItem {
+  id: string;
+  title: string;
+  summary: string;
+  imageUrl: string;
+  date: Date;
 }
 
-// Simulate fetching a single news item (replace with actual data fetching)
+
+interface NewsDetailPageProps extends PageProps {
+}
+
+
+// Simulate fetching a single news item 
 async function getNewsById(id: string) {
     const allNews = await getNewsHighlights();
     return allNews.find(news => news.id === id);

@@ -1,17 +1,25 @@
 import Image from 'next/image';
 import { getTeamById, getPlayersByTeamId } from "@/lib/data";
-import type { Team, Player } from '@/lib/types';
+import type { Player } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { User } from 'lucide-react';
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
+import type { PageProps } from 'next';
 
-interface TeamDetailPageProps {
-  params: { id: string };
+
+export interface TeamItem {
+  id: string;
+  name: string;
+  logoUrl: string;
+};
+
+interface TeamDetailPageProps extends PageProps {
+
 }
 
 export default async function TeamDetailPage({ params }: TeamDetailPageProps) {
-  const team: Team | undefined = await getTeamById(params.id);
+  const team: TeamItem | undefined = await getTeamById(params.id);
 
   if (!team) {
     notFound(); // Show 404 if team not found
@@ -19,7 +27,7 @@ export default async function TeamDetailPage({ params }: TeamDetailPageProps) {
 
   const players: Player[] = await getPlayersByTeamId(params.id);
 
-  return (
+     return (
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row items-center gap-6">
         <Image
@@ -44,10 +52,10 @@ export default async function TeamDetailPage({ params }: TeamDetailPageProps) {
                 <li key={player.id} className="flex items-center gap-3 p-3 border rounded-md bg-secondary/50">
                   <Avatar>
                      {/* Assuming no player images for now, using fallback */}
-                    <AvatarFallback>
+                     <AvatarFallback>
                       <User className="h-5 w-5" />
                     </AvatarFallback>
-                  </Avatar>
+                   </Avatar>
                   <span className="font-medium">{player.name}</span>
                 </li>
               ))}
